@@ -239,12 +239,15 @@ $(function() {
 	    	});
 
 	    	// Add new table row for manual SSID
-	    	$("#network > tbody").append('<tr id="manual_ssid_hack" class="select_network" data-security="0" data-ssid="Dummy_SSID"><td style="height:24px;" ><input id="manual_ssid_value" type="text"> </td></tr>');
+	    	$("#network > tbody").append('<tr id="manual_ssid_hack" class="select_network" data-security="0" data-ssid="Dummy_SSID"><td style="height:24px;" >MANUAL SSID</td></tr>');
          
+
+
          // Handle the new rows click event and set the data-ssid to textbox's value.
          // jquery executes handlers in the order their added so keep above following click handler
-         $('#manual_ssid_hack').click(function(){ 
-               $(this).data('ssid') = $('#manual_ssid_value').val();
+         $('#manual_ssid_value').on("input change keyup paste", function(){ 
+               $('#manual_ssid_hack').data('ssid') = $('#manual_ssid_value').val();
+               $('#manual_ssid_hack').text($('#manual_ssid_value').val());
                console.log("SSID set to: " + $(this).data('ssid'));
          });
 
@@ -491,6 +494,13 @@ $(function() {
 
 			    <tbody>
 			    </tbody>
+			    <tfoot>
+			    	<tr>
+			    	<td>
+			    	         <input id="manual_ssid_value" type="text">
+			    	</td>
+			    	</tr>
+			    </tfoot>
 			</table>
 
 			<div id="password" class="pure-form">
